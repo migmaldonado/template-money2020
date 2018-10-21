@@ -1,3 +1,4 @@
+$('#loading').hide();
 $('#section1').hide();
 $('#section2').hide();
 $('#section3').hide();
@@ -31,8 +32,8 @@ ask(text, function (err, result) {
     if (err) {
         document.getElementById('result').innerHTML = 'No Answer.';
     } else {
-        response = ''
-        //speak(response);
+        response = 'ok'
+        speak(response);
 	var text = "We see an old bill payed to ABC cable compnay. Would you like to pay to same company"
       $('#section3').hide();
       $('#section4').show();
@@ -48,16 +49,48 @@ ask(text, function (err, result) {
     } else {
         $('#pmt_amount').val('$20.00');
         response = 'Paying the bill amount of $20 to ABC cable company'
-        merchantLocator();
-        speak(response);
-        $('#section4').hide();
-        $('#section5').show();
+        var authorizationToken = "Bearer A21AAE_-aFEnQwlcC7g_HufUtOz5N43KHizzfV9Q5vu4Uh6odMdKhXxrW1G57jHvfQ8ZNkRIbkoLEIu19efJHaRIEBxsobr0w"
+  paymentDetails={
+  "amount": {
+    "value": "5",
+    "currency": "USD"
+  },
+  "payee": {
+    "id": "payee@example.com",
+    "type": "EMAIL"
+  },
+  "payment_type": "PERSONAL"
+}
+$.ajax({
+  type: "POST",
+  beforeSend: function(request) {
+
+    request.setRequestHeader("Content-Type", "application/json");
+    request.setRequestHeader("Authorization", authorizationToken);
+  },
+url: "https://api.sandbox.paypal.com/v1/payments/personal-payments/pay",
+
+  data: JSON.stringify(paymentDetails),
+  processData: false,
+  success: function(msg) {
+  //  $("#results").append("The result =" + JSON.stringify(msg));
+    console.log(msg);
+$('#loading').hide();
+ $('#section5').show();
+
         response = 'Your cable bill is payed. Thank you for using EZ Pay.Quick TiP: As you are paying your bills on time in last 6 months you are eligible for 100$ loan'
 
         speak(response);
+  }
+});
+
+        speak(response);
+$('#section4').hide();
+	$('#loading').show();
+
         }
 })
-        speak(response);
+      //  speak(response);
         }
 })
         }
