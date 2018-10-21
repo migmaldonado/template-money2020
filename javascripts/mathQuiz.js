@@ -31,9 +31,9 @@ ask(text, function (err, result) {
     if (err) {
         document.getElementById('result').innerHTML = 'No Answer.';
     } else {
-        response = 'We see an old bill payed to ABC cable compnay.'
-        speak(response);
-	var text = "Would you like to pay to same company"
+        response = ''
+        //speak(response);
+	var text = "We see an old bill payed to ABC cable compnay. Would you like to pay to same company"
       $('#section3').hide();
       $('#section4').show();
 	ask(text, function (err, result) {
