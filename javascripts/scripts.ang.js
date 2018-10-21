@@ -31,7 +31,7 @@ app.controller('myPageCtrl', function($scope,$http){
 	/* ------------------------------ */
 
 	$scope.scrollTop = function() {
-		$('html, body').animate({ scrollTop: 0 }, "slow");
+//		$('html, body').animate({ scrollTop: 0 }, "slow");
 	}
 
 	/* ------------------------------ */
@@ -58,7 +58,7 @@ app.controller('myPageCtrl', function($scope,$http){
 	}
 
 	$(document).scroll(function() {
-		$scope.scrollSpy();
+//		$scope.scrollSpy();
 	})
 
 	/* ------------------------------ */
@@ -72,7 +72,7 @@ app.controller('myPageCtrl', function($scope,$http){
 			$scope.menuActiveHeight = $scope.header.outerHeight(true);
 			$scope.header.removeClass('active');
 			$scope.scrollSpy();
-		},1000);
+		},1);
 
 		$scope.scrollNav = function(e) {
 			e.preventDefault();
@@ -80,7 +80,7 @@ app.controller('myPageCtrl', function($scope,$http){
 			$scope.pageAnimate = function(page_block) {
 				$('html, body').animate({
 					scrollTop: $('.' + page_block + '').offset().top-$scope.menuActiveHeight
-				}, 700);
+				}, 1);
 			}
 			if ($(e.target).hasClass('link_features') || $(e.target).hasClass('container_arrow')) {
 				$scope.pageAnimate('elements');
